@@ -1,11 +1,10 @@
 "use client"
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { FaCheck } from "react-icons/fa6";
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 
 const style = {
   position: 'absolute',
@@ -29,7 +28,7 @@ export default function (){
     
         const [open, setOpen] = useState(false);
 
-  React.useEffect(() => {
+useEffect(() => {
     setOpen(true);
     if(!open){
         setTimeout(() => {

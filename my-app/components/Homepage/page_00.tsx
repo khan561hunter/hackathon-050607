@@ -5,17 +5,12 @@ import tshirt from "@/app/components/black-and-white-mens-stripped-t-shirt.jpg"
 import Image from "next/image";
 import Link from "next/link";
 import model from "@/app/components/full-street-fashion-slender-figu.jpg"
-import blue from "@/app/components/pexels-photo-1462637.webp"
+
 import black from "@/app/components/fashion-men-s-individuality-black-and-white-157675.webp"
 
 export default async function Zero(){
 
-    const data = await client.fetch(`*[_type == "product"][0...3]
-        {name, price,
-         description, 
-         "imageUrl": imageUrl.asset->url, 
-         "slug": slug.current, 
-         _id}`);
+    
 
     return(
         <main className="bg-gray-500 h-screen  mx-auto">

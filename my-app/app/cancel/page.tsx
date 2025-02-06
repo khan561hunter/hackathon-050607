@@ -25,7 +25,7 @@ const style = {
 
 
 
-export default function (){
+export default function Cancel(){
     
     
         const [open, setOpen] = useState(false);

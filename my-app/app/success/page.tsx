@@ -23,7 +23,7 @@ const style = {
 
 
 
-export default function (){
+export default function Success(){
     
     
         const [open, setOpen] = useState(false);

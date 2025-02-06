@@ -40,7 +40,7 @@ useEffect(() => {
 
   }
      // Open modal automatically when component mounts
-  }, []);
+});
 
   const handleClose = () => setOpen(false);
 

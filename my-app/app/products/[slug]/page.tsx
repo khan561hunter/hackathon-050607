@@ -2,6 +2,7 @@
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -23,6 +24,8 @@ interface Props {
 export default function ProductsDetails({ params }: Props) {
   const [products, setProducts] = useState<Product | null>(null);
   const [notFound, setNotFound] = useState(false); // New state for handling "not found" cases
+  const notify = () => toast("Added to Cart");
+  const notify2 = () => toast("Added to Wishlist");
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -60,18 +63,20 @@ export default function ProductsDetails({ params }: Props) {
   }
   if (!products) return <div>Loading...</div>;
 
-  const handleAddToCart = (product: Product) => {
+  const handleAddToCart = (product: Product , notify: () => void) => {
     try {
       const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
       const existingProduct = savedCart.find((item: Product) => item._id === product._id);
 
       if (existingProduct) {
         existingProduct.quantity += 1;
+        
       } else {
         savedCart.push({ ...product, quantity: 1 });
       }
 
       localStorage.setItem("cart", JSON.stringify(savedCart));
+      notify();
       
     } catch (error) {
       console.error("Error updating cart:", error);
@@ -79,7 +84,7 @@ export default function ProductsDetails({ params }: Props) {
     }
   };
 
-  const handleWishlist = (product: Product) => {
+  const handleWishlist = (product: Product , notify2: () => void) => {
     try {
       const savedWishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
       const existingProduct = savedWishlist.find((item: Product) => item._id === product._id);
@@ -93,7 +98,9 @@ export default function ProductsDetails({ params }: Props) {
       }
 
       localStorage.setItem("wishlist", JSON.stringify(savedWishlist));
+      notify2();
     } catch (error) {
+      
       console.error("Error updating wishlist:", error);
       
     }
@@ -121,19 +128,22 @@ export default function ProductsDetails({ params }: Props) {
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                   {/* Add to Cart Button */}
                   <button
-                    onClick={() => handleAddToCart(products)}
+                    onClick={() => handleAddToCart(products , notify)}
+                   
                     className="p-4 w-full md:w-[170px] bg-gradient-to-r from-teal-600 to-purple-700 rounded-full text-white font-bold"
                   >
                     Add to Cart
                   </button>
+                  <ToastContainer />
 
                   {/* Wishlist Button */}
                   <button
-                    onClick={() => handleWishlist(products)}
+                    onClick={() => handleWishlist(products , notify2)}
                     className="p-4 w-full md:w-[170px] bg-gradient-to-r from-teal-600 to-purple-700 rounded-full text-white font-bold"
                   >
                     Wishlist
                   </button>
+                  
                 </div>
               </div>
             </div>

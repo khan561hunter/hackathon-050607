@@ -74,6 +74,7 @@ export default function Header() {
                   <Link href={"/wishlist"}>
                     <FaList className="w-6 h-6 cursor-pointer" />
                   </Link>
+                  <Link href={"/admin/dashboard"}>Admin</Link>
                 </>
               ) : (
                 <>

@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useState } from "react"
+import { ToastContainer, toast } from 'react-toastify';
 
 import { ImBin } from "react-icons/im";
 interface Product {
@@ -39,7 +40,8 @@ interface Product {
 
 export default function Wishlist(){
 
-    
+
+    const notify = () => toast("Added to Cart");
 
     const[Wishlist , setWishlist] = useState<Product[]>([]);
 
@@ -71,7 +73,7 @@ export default function Wishlist(){
     
       }
 
-    const HandleAddtoCart = (ProductID: string) => {
+    const HandleAddtoCart = (ProductID: string , notify: () => void) => {
         // Retrieve the current cart from local storage or initialize it as an empty array
         const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     
@@ -89,6 +91,7 @@ export default function Wishlist(){
                 cart[productIndex].quantity += productToAdd.quantity;
             }
             localStorage.setItem("cart", JSON.stringify(cart));
+            notify();
         }
     
         // (Optional) Remove the product from the wishlist
@@ -131,7 +134,9 @@ export default function Wishlist(){
                                         >
                                         <ImBin className="fill-red bg-red"/>
                                 </button>
-                               <button onClick={() => {HandleAddtoCart(item._id)}} className="bg-blue-500 text-white py-2 px-4 rounded">Add to cart</button>
+                               
+                               <button onClick={() => {HandleAddtoCart(item._id , notify)}} className="bg-blue-500 text-white py-2 px-4 rounded">Add to cart</button>
+                               <ToastContainer />
                             </div>
                         </div>
 

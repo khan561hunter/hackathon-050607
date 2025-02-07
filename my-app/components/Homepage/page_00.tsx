@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { client } from "@/sanity/lib/client";
+
 import tshirt from "@/app/components/black-and-white-mens-stripped-t-shirt.jpg"
 import Image from "next/image";
 import Link from "next/link";
@@ -13,7 +13,7 @@ export default async function Zero(){
     
 
     return(
-        <main className="bg-gray-500 h-screen  mx-auto">
+        <main className="bg-gray-500   mx-auto">
             <Carousel>
                 <CarouselContent>
                     <CarouselItem>
